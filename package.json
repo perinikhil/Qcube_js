@@ -1,0 +1,23 @@
+{
+  "name": "Qcube",
+  "version": "1.0.0",
+  "description": "Random question paper generator with paper patterns ?",
+  "main": "app.js",
+  "dependencies": {
+    "babel": "^5.0.10",
+    "chai": "^2.2.0",
+    "mysql": "^2.6.1",
+    "q": "^1.2.0",
+    "restify": "^3.0.1",
+    "sequelize": "^2.0.5"
+  },
+  "devDependencies": {
+    "chai": "^2.2.0",
+    "mocha": "^2.2.1"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC"
+}

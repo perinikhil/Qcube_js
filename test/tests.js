@@ -1,0 +1,1 @@
+require('./departmentsTests/departments.controller.test');
