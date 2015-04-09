@@ -1,9 +1,14 @@
 'use strict';
 
-function sendResponse(data) {
-    res.send(data.code, data.message);
-}
-
 module.exports = {
-    sendResponse: sendResponse
+    responseMessages : {
+        createFail: 'Could not create ',
+        updateFail: 'Could not update ',
+        destroyFail: 'Could not delete ',
+        createSuccess: 'Created ',
+        updateSuccess: 'Updated ',
+        destroySuccess: 'Deleted ',
+        notFound: 'Not found',
+        doesNotExist: ' does not exist'
+    }
 };

@@ -2,56 +2,59 @@
 
 var server = require('../common/server');
 var Department = require('./departments.controller');
-var { sendResponse } = require('../common/helpers.js');
+var messages = require('../common/helpers.js').responseMessages;
 
 server.get('peri', function (req, res) {
     Department.sync();
     res.send('welcome peri');
 });
 
-server.get('department', function (req, res) {
+server.get('departments', function (req, res) {
     Department.list()
         .then(function(departments) {
-            res.json(departments);
+            res.send(200, departments);
         })
         .catch(function() {
-            res.send(404, 'Not found!');
+            res.send(404, messages.notFound);
         });
 });
 
-server.get('department/:id', function (req, res) {
+server.get('departments/:id', function (req, res) {
     Department.show(req.params.id)
         .then(function (department) {
             res.send(department);
         })
         .catch(function() {
-            res.send(404,'Not found!');
+            res.send(404, messages.notFound);
         });
 });
 
-server.post('department', function(req, res) {
+server.post('departments', function(req, res) {
     Department.create(req.params)
         .then(function (department) {
             res.send(department);
         })
         .catch(function() {
-            res.send('Could not create department');
+            res.send(500, messages.createFail);
         });
 });
 
-server.put('department/:id', function(req, res) {
+server.put('departments/:id', function(req, res) {
     Department.update(req.params)
-        .then(function (department) {
-            res.send(department);
+       .then(function(data) {
+            res.send(data.code, data.message);
         })
-        .catch(function(message) {
-            res.send(message);
+        .catch(function(data) {
+            res.send(data.code, data.message);
         });
 });
 
-server.del('department/:id', function(req, res) {
+server.del('departments/:id', function(req, res) {
     Department.destroy(req.params.id)
         .then(function(data) {
+            res.send(data.code, data.message);
+        })
+        .catch(function(data) {
             res.send(data.code, data.message);
         });
 });

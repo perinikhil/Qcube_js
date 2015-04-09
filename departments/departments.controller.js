@@ -2,6 +2,8 @@
 
 var Department = require('./departments.model.js');
 var $q = require('q');
+var messages = require('../common/helpers.js').responseMessages;
+
 
 module.exports = {
     sync: wipe,
@@ -13,7 +15,8 @@ module.exports = {
 };
 
 function list() {
-    return Department.findAll();
+    return Department.findAll()
+        ;
 }
 
 function show(id) {
@@ -30,34 +33,35 @@ function update(params) {
 
     var id = params.id;
     Department.find(id)
-        .then(updateDepartment)
-        .catch(function() {
-            data = {
-                message: 'Department does not exist',
-                code: 400
-            };
-            deferred.reject(data);
-        });
+        .then(updateDepartment);
 
     return deferred.promise;
 
     function updateDepartment(department) {
-
-        department.update(params, {fields: Department.fillable})
-            .then(function() {
-                data = {
-                    message: 'Updated department',
-                    code: 200
-                };
-                deferred.resolve(data);
-            })
-            .catch(function() {
-                data = {
-                    message: 'Could not update department',
-                    code: 400
-                };
-                deferred.reject(data);
-            });
+        if (department == null) {
+            data = {
+                message: 'Department' + messages.doesNotExist,
+                code: 400
+            };
+            deferred.reject(data);
+        }
+        else {
+            department.update(params, {fields: Department.fillable})
+                .then(function () {
+                    data = {
+                        message: messages.updateSuccess + 'department',
+                        code: 200
+                    };
+                    deferred.resolve(data);
+                })
+                .catch(function () {
+                    data = {
+                        message: messages.updateFail + 'department',
+                        code: 500
+                    };
+                    deferred.reject(data);
+                });
+        }
     }
 }
 
@@ -65,32 +69,38 @@ function destroy(id) {
     var data = {};
     var deferred = $q.defer();
 
+    console.log(id);
+
     Department.find(id)
         .then(destroyDepartment)
-        .catch(function() {
-            data.message = 'Department does not exist';
-            data.code = 400;
-            deferred.reject(data);
-        });
 
     return deferred.promise;
 
     function destroyDepartment(department) {
-        department.destroy()
-            .then(function() {
-                data = {
-                    message: 'Deleted department',
-                    code: 200
-                };
-                deferred.resolve(data);
-            })
-            .catch(function() {
-                data = {
-                    message: 'Failed to delete department',
-                    code: 400
-                };
-                deferred.reject(data);
-            });
+        if(department == null) {
+            data = {
+                message: 'Department' + messages.doesNotExist,
+                code: 400
+            };
+            deferred.reject(data);
+        }
+        else {
+            department.destroy()
+                .then(function () {
+                    data = {
+                        message: messages.destroySuccess + 'department',
+                        code: 200
+                    };
+                    deferred.resolve(data);
+                })
+                .catch(function () {
+                    data = {
+                        message: messages.destroyFail + 'department',
+                        code: 400
+                    };
+                    deferred.reject(data);
+                });
+        }
     }
 }
 

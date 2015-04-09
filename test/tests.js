@@ -1,1 +1,1 @@
-require('./departmentsTests/departments.controller.test');
+require('./departments/departments.controller.test');
