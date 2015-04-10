@@ -68,11 +68,9 @@ function update(params) {
 function destroy(id) {
     var data = {};
     var deferred = $q.defer();
-
-    console.log(id);
-
+    
     Department.find(id)
-        .then(destroyDepartment)
+        .then(destroyDepartment);
 
     return deferred.promise;
 
