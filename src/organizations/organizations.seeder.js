@@ -2,20 +2,22 @@
 
 var Organization = require('./organizations.model.js');
 
-function seed() {
+var records = [
+    {
+        name: 'Dayananda Sagar College of Engineering',
+        abbr: 'DSCE'
+    }
+];
 
-    var records = [
-        {
-            name: 'Dayananda Sagar College of Engineering',
-            abbr: 'DSCE'
-        }
-    ];
-
-    return Organization.sync({force: true})
-        .then(function () {
-            return Organization.bulkCreate(records);
-        });
-
+function up() {
+    return Organization.bulkCreate(records);
 }
 
-module.exports = seed;
+function down() {
+    return Organization.sync({force: true})
+}
+
+module.exports = {
+    up: up,
+    down: down
+};

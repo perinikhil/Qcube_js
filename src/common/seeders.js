@@ -1,4 +1,21 @@
 'use strict';
 
-require('../organizations/organizations.seeder')();
-require('../departments/departments.seeder')();
+var orgSeeder = require('../organizations/organizations.seeder');
+var deptSeeder = require('../departments/departments.seeder');
+
+module.exports = function () {
+
+    return deptSeeder.down()
+        .then(orgSeeder.down)
+
+        .then(orgSeeder.up)
+        .then(deptSeeder.up)
+
+        .then(function () {
+            console.log('done seeding');
+        })
+        .catch(function () {
+            console.log('seed error');
+        });
+
+};

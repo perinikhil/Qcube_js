@@ -1,6 +1,8 @@
 'use strict';
 
 var Database = require('../common/database.js');
+var Department = require('../common/models').Department;
+
 
 var Organization = Database.sequelize.define('organizations',
     {
@@ -19,6 +21,11 @@ var Organization = Database.sequelize.define('organizations',
 );
 
 Organization.fillable = ['name', 'abbr'];
+
+//Organization.hasMany(Department, {
+//    foreignKey: 'organization_id'
+//});
+
 //Organization.sync();
 
 module.exports = Organization;

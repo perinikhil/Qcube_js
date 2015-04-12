@@ -2,24 +2,28 @@
 
 var Department = require('./departments.model.js');
 
-function seed() {
+var records = [
+    {
+        //organization_id: 1,
+        name: 'Computer Science and Engineering',
+        abbr: 'CSE'
+    },
+    {
+        //organization_id: 1,
+        name: 'Information Science and Engineering',
+        abbr: 'ISE'
+    }
+];
 
-    var records = [
-        {
-            name: 'Computer Science and Engineering',
-            abbr: 'CSE'
-        },
-        {
-            name: 'Information Science and Engineering',
-            abbr: 'ISE'
-        }
-    ];
-
-    return Department.sync({force: true})
-        .then(function () {
-            return Department.bulkCreate(records);
-        });
-
+function up() {
+    return Department.bulkCreate(records);
 }
 
-module.exports = seed;
+function down() {
+    return Department.sync({force: true});
+}
+
+module.exports = {
+    up: up,
+    down: down
+};

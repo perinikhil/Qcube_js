@@ -2,7 +2,7 @@
 
 var assert = require('chai').assert;
 var client = require('../common/client');
-var seeder = require('../../src/departments/departments.seeder');
+var seeder = require('../../src/common/seeders');
 var messages = require('../../src/common/helpers.js').responseMessages;
 
 
