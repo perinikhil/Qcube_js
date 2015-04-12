@@ -22,9 +22,9 @@ var Organization = Database.sequelize.define('organizations',
 
 Organization.fillable = ['name', 'abbr'];
 
-//Organization.hasMany(Department, {
-//    foreignKey: 'organization_id'
-//});
+Organization.hasMany(Department, {
+    foreignKey: 'organization_id'
+});
 
 //Organization.sync();
 

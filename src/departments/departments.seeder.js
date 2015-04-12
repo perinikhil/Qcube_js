@@ -16,11 +16,12 @@ var records = [
 ];
 
 function up() {
-    return Department.bulkCreate(records);
+    return Department.sync()
+        .then(Department.bulkCreate(records));
 }
 
 function down() {
-    return Department.sync({force: true});
+    return Department.drop({cascade: true});
 }
 
 module.exports = {

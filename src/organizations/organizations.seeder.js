@@ -10,11 +10,12 @@ var records = [
 ];
 
 function up() {
-    return Organization.bulkCreate(records);
+    return Organization.sync()
+        .then(Organization.bulkCreate(records));
 }
 
 function down() {
-    return Organization.sync({force: true})
+    return Organization.drop({cascade: true});
 }
 
 module.exports = {

@@ -14,8 +14,8 @@ module.exports = function () {
         .then(function () {
             console.log('done seeding');
         })
-        .catch(function () {
-            console.log('seed error');
+        .catch(function (err) {
+            console.log('seed error', err);
         });
 
 };
