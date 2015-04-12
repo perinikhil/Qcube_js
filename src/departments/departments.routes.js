@@ -1,13 +1,8 @@
 'use strict';
 
 var server = require('../common/server');
-var Department = require('./departments.controller');
+var Department = require('./departments.controller.js');
 var messages = require('../common/helpers.js').responseMessages;
-
-server.get('peri', function (req, res) {
-    Department.sync();
-    res.send('welcome peri');
-});
 
 server.get('departments', function (req, res) {
     Department.list()
@@ -25,7 +20,7 @@ server.get('departments/:id', function (req, res) {
             res.send(department);
         })
         .catch(function() {
-            res.send(404, messages.notFound);
+            res.send(404, 'Department' + messages.notFound);
         });
 });
 

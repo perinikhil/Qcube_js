@@ -11,8 +11,6 @@ var sequelize = new Sequelize('qcube', 'root', 'peri', {
     }
 });
 
-//sequelize.sync();
-
 module.exports = {
     dataType: Sequelize,
     sequelize: sequelize

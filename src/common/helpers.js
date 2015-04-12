@@ -8,7 +8,7 @@ module.exports = {
         createSuccess: 'Created ',
         updateSuccess: 'Updated ',
         destroySuccess: 'Deleted ',
-        notFound: 'Not found',
+        notFound: ' not found',
         doesNotExist: ' does not exist'
     }
 };

@@ -16,7 +16,8 @@
     "mocha": "^2.2.1"
   },
   "scripts": {
-    "test": "mocha"
+    "start": "node src/app.js",
+    "test": "node_modules/.bin/mocha -R spec --recursive test"
   },
   "author": "",
   "license": "ISC"
